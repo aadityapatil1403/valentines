@@ -7,9 +7,11 @@ body {
 }
 
 img {
-  height: 400px;
+  height: 300px;
   width: auto;
   padding: 10px;
+  display: block;
+  margin: 20px auto;
 }
 
 #valentineQuestion {
