@@ -20,11 +20,36 @@
     </button>
     <script>
       var music = document.getElementById("music");
-      music.play().catch(function() {
-        document.addEventListener("click", function handler() {
-          music.play();
-          document.removeEventListener("click", handler);
+      var played = false;
+
+      function tryPlay() {
+        if (played) return;
+        music.play().then(function() {
+          played = true;
+          cleanup();
+        }).catch(function() {});
+      }
+
+      function onInteraction() {
+        if (played) return;
+        music.play().then(function() {
+          played = true;
+          cleanup();
+        }).catch(function() {});
+      }
+
+      function cleanup() {
+        ["click", "touchstart", "keydown", "scroll"].forEach(function(evt) {
+          document.removeEventListener(evt, onInteraction);
         });
+      }
+
+      // Attempt autoplay immediately
+      tryPlay();
+
+      // Fallback: play on any user interaction
+      ["click", "touchstart", "keydown", "scroll"].forEach(function(evt) {
+        document.addEventListener(evt, onInteraction);
       });
     </script>
   </body>
