@@ -5,53 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thank you missis 🙂  </title>
     <link rel="stylesheet" href="css/lastpage.css" />
-    <link rel="preload" href="congratulations.mp3" as="audio" type="audio/mpeg" />
+
   </head>
   <body>
     <div id="thankyou"><b>Thank you missis 🙂</b></div>
 
     <img height="450px" id="rizz" src="hug.png" alt="rizzler god" class="responsive" />
     <br />
-    <audio id="music" autoplay loop preload="auto">
+    <audio controls autoplay loop>
       <source src="congratulations.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
     </audio>
     <h1>Can't wait to hug you like this ❤️</h1>
     <button class="button" onclick="location.href='lastpage.html'">
       Click me for a surprise!
     </button>
-    <script>
-      var music = document.getElementById("music");
-      var played = false;
 
-      function tryPlay() {
-        if (played) return;
-        music.play().then(function() {
-          played = true;
-          cleanup();
-        }).catch(function() {});
-      }
-
-      function onInteraction() {
-        if (played) return;
-        music.play().then(function() {
-          played = true;
-          cleanup();
-        }).catch(function() {});
-      }
-
-      function cleanup() {
-        ["click", "touchstart", "keydown", "scroll"].forEach(function(evt) {
-          document.removeEventListener(evt, onInteraction);
-        });
-      }
-
-      // Attempt autoplay immediately
-      tryPlay();
-
-      // Fallback: play on any user interaction
-      ["click", "touchstart", "keydown", "scroll"].forEach(function(evt) {
-        document.addEventListener(evt, onInteraction);
-      });
-    </script>
   </body>
 </html>
