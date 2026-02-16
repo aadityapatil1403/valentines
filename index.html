@@ -9,9 +9,11 @@
   </head>
   <body>
     <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
-    <button class="answerButton" onclick="location.href='thankyou.html'">
-      Yes
-    </button>
+    <div id="yesContainer">
+      <button class="answerButton yesButton" onclick="location.href='thankyou.html'">
+        Yes
+      </button>
+    </div>
     <button class="answerButton" id="noButton">No, I hate you ☹️</button>
     <br />
     <img src="please.png" height="300px" width="auto" alt="cat asking question" class="responsive" />
@@ -26,7 +28,25 @@
           var currentFontSize = parseInt(
             window.getComputedStyle(yesButton).fontSize
           );
-          yesButton.style.fontSize = currentFontSize + 10 + "px";
+          var noButton = document.getElementById("noButton");
+          noButton.style.position = "fixed";
+          var maxX = window.innerWidth - noButton.offsetWidth;
+          var maxY = window.innerHeight - noButton.offsetHeight;
+          noButton.style.left = Math.random() * maxX + "px";
+          noButton.style.top = Math.random() * maxY + "px";
+
+          var container = document.getElementById("yesContainer");
+          var count = container.querySelectorAll(".yesButton").length;
+          for (var i = 0; i < count; i++) {
+            var newYes = document.createElement("button");
+            newYes.className = "answerButton yesButton";
+            newYes.textContent = "Yes";
+            newYes.onclick = function() { location.href = "thankyou.html"; };
+            newYes.style.position = "fixed";
+            newYes.style.left = Math.random() * (window.innerWidth - 80) + "px";
+            newYes.style.top = Math.random() * (window.innerHeight - 40) + "px";
+            document.body.appendChild(newYes);
+          }
         });
     </script>
   </body>
